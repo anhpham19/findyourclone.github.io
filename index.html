@@ -66,15 +66,19 @@
       }
     }
     body { 
-      background: url(http://cdn.psfk.com/wp-content/uploads/2015/06/shutterstock_194470820.jpg) no-repeat center center fixed; 
+      background: url(https://peteletricaufjf.files.wordpress.com/2013/08/28208-43384-tecnologia.jpg) no-repeat center center fixed; 
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
     }
+    .transparent-cell{
+      background: opacity(0.5);
+    }
   </style>
   <!-- Custom CSS -->
   <link href="css/full-slider.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -122,25 +126,25 @@
                     var probCell = row.insertCell(2);
                     numberCell.innerHTML = (i+1).toString();
                     var href = "\"https://en.wikipedia.org/wiki/" + concepts[i].name + "\"";
-                    nameCell.innerHTML = "<a href=" + href+ ">" + concepts[i].name + "</a>";
+                    nameCell.innerHTML = "<b><a style='color:black;'href=" + href+ ">" + concepts[i].name + "</a></b>";
                     nameCell.className += " table-active";
-                    probCell.innerHTML = Math.ceil(concepts[i].value * 100) + "%";
+                    probCell.innerHTML = "<b>" + Math.ceil(concepts[i].value * 100) + "%" + "</b>";
                     var percent = concepts[i].value;
                     if(percent >= 0.80)
                     {
-                      probCell.className += " bg-success";
+                      probCell.style.background = "rgba(0, 255, 0, 0.5)";
                     }else if(percent >= 0.60)
                     {
-                      probCell.className += " bg-primary";
+                      probCell.style.background = "rgba(204, 255, 51, 0.5)";
                     }else if(percent >= 0.40)
                     {
-                      probCell.className += " bg-info";
+                      probCell.style.background = "rgba(255, 255, 0, 0.5)";
                     }else if(percent >= 0.2)
                     {
-                      probCell.className += " bg-warning";
+                      probCell.style.background = "rgba(255, 153, 0, 0.5)";
                     }else
                     {
-                      probCell.className += " bg-danger";
+                      probCell.style.background = "rgba(255, 0, 0, 0.5)";
                     }
                     console.log(concepts[i].value);
                   }
