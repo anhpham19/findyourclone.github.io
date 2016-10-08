@@ -40,10 +40,12 @@
         var error;
         var concepts;
         var table;
+        var spinner;
       </script>
       <script>
-
         function processImageUpload(){
+
+          spinner.style.visibility = "";
           var file = document.getElementById('uploadBtn').files[0];
           var fr = new FileReader();
           fr.addEventListener("load", function () {
@@ -52,7 +54,6 @@
             app.models.predict({name: "Camille's Awesome Application"}, base64).then(
               function(response) {
                 resp = response;
-                table = document.getElementById("displayTable");
                 while(table.rows.length > 1)
                 {
                   table.deleteRow(1);
@@ -68,7 +69,7 @@
                   nameCell.innerHTML = concepts[i].name;
                   probCell.innerHTML = concepts[i].value;
                 }
-
+                spinner.style.visibility = "hidden";
               },
               function(err) {
                 console.error(err);
@@ -78,8 +79,6 @@
           }, false);
 
           fr.readAsDataURL(file);
-
-
         }
       </script>
     </head>
@@ -115,7 +114,7 @@
           <div class="fileUpload btn btn-primary">
             <input id="uploadBtn" type="file" class="upload" onchange="processImageUpload();"/>
           </div>
-          <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+          <i id="spinner" class="fa fa-spinner fa-spin" style="font-size:24px"></i>
         </div>
         <div class="row">
           <div class="col-md-6">
@@ -145,5 +144,10 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script>
+      table = document.getElementById("displayTable");
+      spinner = document.getElementById("spinner");
+      spinner.style.visibility = "hidden";
+    </script>
   </body>
   </html>
