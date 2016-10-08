@@ -122,7 +122,8 @@
                   var nameCell = row.insertCell(1);
                   var probCell = row.insertCell(2);
                   numberCell.innerHTML = (i+1).toString();
-                  nameCell.innerHTML = concepts[i].name;
+                  var href = "\"https://en.wikipedia.org/wiki/" + concepts[i].name + "\"";
+                  nameCell.innerHTML = "<a href=" + href+ ">" + concepts[i].name + "</a>";
                   probCell.innerHTML = Math.ceil(concepts[i].value * 100) + "%";
                   console.log(concepts[i].value);
                 }
