@@ -23,7 +23,7 @@
 
   <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
   <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -38,40 +38,44 @@
           );
         var resp;
         var error;
+        var concepts;
+        var table;
       </script>
       <script>
+
         function processImageUpload(){
           var file = document.getElementById('uploadBtn').files[0];
           var fr = new FileReader();
           fr.addEventListener("load", function () {
-           var base64 = fr.result.substring(fr.result.indexOf(',')+1);
-           app.models.predict({name: 'food-items-v1.0'}, base64).then(
-            function(response) {
-              resp = response;
-              var table = document.getElementById("displayTable");
-              for(var i = 0; i < table.rows; i++)
-              {
-                table.deleteRow(i);
+
+            var base64 = fr.result.substring(fr.result.indexOf(',')+1);
+            app.models.predict({name: "Camille's Awesome Application"}, base64).then(
+              function(response) {
+                resp = response;
+                table = document.getElementById("displayTable");
+                while(table.rows.length > 1)
+                {
+                  table.deleteRow(1);
+                }
+                concepts = response.data.outputs[0].data.concepts;
+                for(var i = 0; i < concepts.length; i++)
+                {
+                  var row = table.insertRow(i+1);
+                  var numberCell = row.insertCell(0);
+                  var nameCell = row.insertCell(1);
+                  var probCell = row.insertCell(2);
+                  numberCell.innerHTML = (i+1).toString();
+                  nameCell.innerHTML = concepts[i].name;
+                  probCell.innerHTML = concepts[i].value;
+                }
+
+              },
+              function(err) {
+                console.error(err);
+                error = err;
               }
-              var concepts = resp.data.outputs[0].data.concepts;
-              for(var i = 0; i < concepts.length; i++)
-              {
-                var row = table.insertRow(i+1);
-                var numberCell = row.insertCell(0);
-                var nameCell = row.insertCell(1);
-                var probCell = row.insertCell(2);
-                numberCell.innerHTML = (i+1).toString();
-                nameCell.innerHTML = concepts[i].name;
-                probCell.innerHTML = concepts[i].value;
-              }
-              
-            },
-            function(err) {
-              console.error(err);
-              error = err;
-            }
-            );
-         }, false);
+              );
+          }, false);
 
           fr.readAsDataURL(file);
 
@@ -91,13 +95,11 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="#">Find Your Clones</a>
           </div>
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -106,29 +108,37 @@
       <div class="container">
 
         <div class="starter-template row">
-          <h1>Don't forget to put a cool title here</h1>
-          <p class="lead">Don't forget to put a nice introductory paragraph here.
+          <h1>Have you wonder who looks exactly like you?</h1>
+          <p class="lead">.
             <br>
           </p>
           <div class="fileUpload btn btn-primary">
             <input id="uploadBtn" type="file" class="upload" onchange="processImageUpload();"/>
           </div>
+          <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
         </div>
-        <div class="col-md-6">
-          <table class="table" id="displayTable">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Percent of similarities</th>
-              </tr>
-            </thead>
-            <tbody>
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table" id="displayTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Percent of similarities</th>
+                </tr>
+              </thead>
+              <tbody>
 
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div><!-- /.container -->
+      <footer class="footer">
+        <div class="container">
+          <p class="text-muted">Coded by Kelvin. Powered by <a href="https://www.clarifai.com">Calrifai</a>.</p>
+        </div>
+      </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
