@@ -3,301 +3,267 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>Full Slider - Start Bootstrap Template</title>
+  <title>Full Slider - Start Bootstrap Template</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .glyphicon.fast-right-spinner {
-          -webkit-animation: glyphicon-spin-r 1s infinite linear;
-          animation: glyphicon-spin-r 1s infinite linear;
+  <!-- Bootstrap Core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .glyphicon.fast-right-spinner {
+      -webkit-animation: glyphicon-spin-r 1s infinite linear;
+      animation: glyphicon-spin-r 1s infinite linear;
+    }
+    @-webkit-keyframes glyphicon-spin-r {
+      0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
       }
-      @-webkit-keyframes glyphicon-spin-r {
-          0% {
-            -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
 
-        100% {
-            -webkit-transform: rotate(359deg);
-            transform: rotate(359deg);
-        }
+      100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+      }
     }
 
     @keyframes glyphicon-spin-r {
       0% {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
-    }
+      }
 
-    100% {
+      100% {
         -webkit-transform: rotate(359deg);
         transform: rotate(359deg);
+      }
     }
-}
 
-@-webkit-keyframes glyphicon-spin-l {
-  0% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-}
+    @-webkit-keyframes glyphicon-spin-l {
+      0% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+      }
 
-100% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-}
-}
+      100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+    }
 
-@keyframes glyphicon-spin-l {
-  0% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-}
+    @keyframes glyphicon-spin-l {
+      0% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+      }
 
-100% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-}
-}
-</style>
-<!-- Custom CSS -->
-<link href="css/full-slider.css" rel="stylesheet">
+      100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+    }
+    body { 
+      background: url(https://openclipart.org/image/2400px/svg_to_png/19011/shokunin-World-Map.png) no-repeat center center fixed; 
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+  </style>
+  <!-- Custom CSS -->
+  <link href="css/full-slider.css" rel="stylesheet">
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         <script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-2.0.9.js"></script>
         <script>
-            var app = new Clarifai.App(
-              'RXezf3hwCAZuqnsOkcIO2fcyLnKLtPHVa-FME8R8',
-              'oD3WGCGnGI2VM8yozp6xmy2zCRO8rp3nc6SphXm-'
-              );
-            var resp;
-            var error;
-            var concepts;
-            var table;
-            var spinner;
-            var spinnerText;
+          var app = new Clarifai.App(
+            'RXezf3hwCAZuqnsOkcIO2fcyLnKLtPHVa-FME8R8',
+            'oD3WGCGnGI2VM8yozp6xmy2zCRO8rp3nc6SphXm-'
+            );
+          var resp;
+          var error;
+          var concepts;
+          var table;
+          var spinner;
+          var spinnerText;
         </script>
         <script>
-            function processImageUpload(){
+          function processImageUpload(){
 
-              spinner.style.visibility = "";
-              var file = document.getElementById('uploadBtn').files[0];
-              var fr = new FileReader();
-              fr.addEventListener("load", function () {
+            spinner.style.visibility = "";
+            var file = document.getElementById('uploadBtn').files[0];
+            var fr = new FileReader();
+            fr.addEventListener("load", function () {
 
-                var base64 = fr.result.substring(fr.result.indexOf(',')+1);
-                spinnerText.innerHTML = "Uploading...";
+              var base64 = fr.result.substring(fr.result.indexOf(',')+1);
+              spinnerText.innerHTML = "Uploading...";
 
-                app.models.predict({name: "Camille's Awesome Application"}, base64).then(
-                  function(response) {
-                    resp = response;
-                    while(table.rows.length > 1)
-                    {
-                      table.deleteRow(1);
+              app.models.predict({name: "Camille's Awesome Application"}, base64).then(
+                function(response) {
+                  resp = response;
+                  while(table.rows.length > 1)
+                  {
+                    table.deleteRow(1);
                   }
                   concepts = response.data.outputs[0].data.concepts;
                   for(var i = 0; i < concepts.length; i++)
                   {
-                      var row = table.insertRow(i+1);
-                      var numberCell = row.insertCell(0);
-                      var nameCell = row.insertCell(1);
-                      var probCell = row.insertCell(2);
-                      numberCell.innerHTML = (i+1).toString();
-                      var href = "\"https://en.wikipedia.org/wiki/" + concepts[i].name + "\"";
-                      nameCell.innerHTML = "<a href=" + href+ ">" + concepts[i].name + "</a>";
-                      probCell.innerHTML = Math.ceil(concepts[i].value * 100) + "%";
-                      var percent = concepts[i].value;
-                      if(percent >= 0.80)
-                      {
-                        probCell.className += " bg-success";
-                      }else if(percent >= 0.60)
-                      {
-                        probCell.className += " bg-primary";
-                      }else if(percent >= 0.40)
-                      {
-                        probCell.className += " bg-info";
-                      }else if(percent >= 0.2)
-                      {
-                        probCell.className += " bg-warning";
-                      }else
-                      {
-                        probCell.className += " bg-danger";
-                      }
-                      console.log(concepts[i].value);
+                    var row = table.insertRow(i+1);
+                    var numberCell = row.insertCell(0);
+                    var nameCell = row.insertCell(1);
+                    var probCell = row.insertCell(2);
+                    numberCell.innerHTML = (i+1).toString();
+                    var href = "\"https://en.wikipedia.org/wiki/" + concepts[i].name + "\"";
+                    nameCell.innerHTML = "<a href=" + href+ ">" + concepts[i].name + "</a>";
+                    probCell.innerHTML = Math.ceil(concepts[i].value * 100) + "%";
+                    var percent = concepts[i].value;
+                    if(percent >= 0.80)
+                    {
+                      probCell.className += " bg-success";
+                    }else if(percent >= 0.60)
+                    {
+                      probCell.className += " bg-primary";
+                    }else if(percent >= 0.40)
+                    {
+                      probCell.className += " bg-info";
+                    }else if(percent >= 0.2)
+                    {
+                      probCell.className += " bg-warning";
+                    }else
+                    {
+                      probCell.className += " bg-danger";
+                    }
+                    console.log(concepts[i].value);
                   }
                   spinner.style.visibility = "hidden";
-              },
-              function(err) {
-                console.error(err);
-                error = err;
-            }
-            );
+                },
+                function(err) {
+                  console.error(err);
+                  error = err;
+                }
+                );
             }, false);
-              spinnerText.innerHTML = "Reading image...";
+            spinnerText.innerHTML = "Reading image...";
 
-              fr.readAsDataURL(file);
+            fr.readAsDataURL(file);
           }
-      </script>
-  </head>
+        </script>
+      </head>
 
-  <body>
+      <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Start Bootstrap</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
+              <ul class="nav navbar-nav">
+                <li>
+                  <a href="#">About</a>
+                </li>
+                <li>
+                  <a href="#">Services</a>
+                </li>
+                <li>
+                  <a href="#">Contact</a>
+                </li>
+              </ul>
             </div>
             <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+          </div>
+          <!-- /.container -->
+        </nav>
 
-    <!-- Full Page Image Background Carousel Header -->
-    <header id="myCarousel" class="carousel slide">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
+        <!-- Full Page Image Background Carousel Header -->
 
-        <!-- Wrapper for Slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <!-- Set the first background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://s.hswstatic.com/gif/twin-16.jpg');"></div>
-                <div class="carousel-caption">
-                    <h2>Wanna find someone look exactly like you?</h2>
-                </div>
-            </div>
-            <div class="item">
-                <!-- Set the second background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
-                <div class="carousel-caption">
-                    <h2>Caption 2</h2>
-                </div>
-            </div>
-            <div class="item">
-                <!-- Set the third background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
-                <div class="carousel-caption">
-                    <h2>Caption 3</h2>
-                </div>
-            </div>
-        </div>
 
-        <!-- Controls -->
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="icon-prev"></span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="icon-next"></span>
-        </a>
 
-    </header>
-
-    <!-- Page Content -->
-    <div class="container">
-
-        <div class="row">
+        <!-- Page Content -->
+        <div class="container">
+          <br/>
+          <br/>
+          <div class="row">
             <div class="col-lg-12">
-                <h1>Have you wonder who looks exactly like you?</h1>
+              <h1>Have you wonder who looks exactly like you?</h1>
             </div>
-        </div>
+          </div>
 
-        <hr>
-        <div class="fileUpload btn btn-primary">
+          <hr>
+          <div class="fileUpload btn btn-primary">
             <input id="uploadBtn" type="file" class="upload" onchange="processImageUpload();"/>
-        </div>
-        <button id="spinner" type="button" class="btn btn-default">
+          </div>
+          <button id="spinner" type="button" class="btn btn-default">
             <span class="glyphicon glyphicon-repeat fast-right-spinner"></span>
             <span id="spinnerText">fast-right-spinner</span>
-        </button>
-        <div class="row">
-          <div class="col-md-6">
-            <table class="table" id="displayTable">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Percent of similarities</th>
-                </tr>
-              </thead>
-              <tbody>
+          </button>
+          <div class="row">
+            <div class="col-md-6">
+              <table class="table" id="displayTable">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Percent of similarities</th>
+                  </tr>
+                </thead>
+                <tbody>
 
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
           </div>
+
+          <!-- Footer -->
+          <footer>
+            <div class="row">
+              <div class="col-md-6">
+                <p class="text-muted">Coded by Kelvin. Powered by <a href="https://www.clarifai.com">Clarifai</a>.</p>
+              </div>
+            </div>
+            <!-- /.row -->
+          </footer>
+
         </div>
+        <!-- /.container -->
 
-</div>
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
 
-<!-- Footer -->
-<footer>
-    <div class="row">
-        <div class="col-md-6">
-            <p class="text-muted">Coded by Kelvin. Powered by <a href="https://www.clarifai.com">Clarifai</a>.</p>
-        </div>
-    </div>
-    <!-- /.row -->
-</footer>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
 
-</div>
-<!-- /.container -->
-
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
-<!-- Script to Activate the Carousel -->
-<script>
-    $('.carousel').carousel({
+        <!-- Script to Activate the Carousel -->
+        <script>
+          $('.carousel').carousel({
         interval: 5000 //changes the speed
-    })
-</script>
-<script>
-  table = document.getElementById("displayTable");
-  spinner = document.getElementById("spinner");
-  spinnerText = document.getElementById("spinnerText");
-  spinner.style.visibility = "hidden";
-  spinnerText.innerHTML = "Done!";
-</script>
+      })
+    </script>
+    <script>
+      table = document.getElementById("displayTable");
+      spinner = document.getElementById("spinner");
+      spinnerText = document.getElementById("spinnerText");
+      spinner.style.visibility = "hidden";
+      spinnerText.innerHTML = "Done!";
+    </script>
 
-</body>
+  </body>
 
-</html>
+  </html>
