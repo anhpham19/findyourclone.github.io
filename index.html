@@ -117,6 +117,23 @@
                       var href = "\"https://en.wikipedia.org/wiki/" + concepts[i].name + "\"";
                       nameCell.innerHTML = "<a href=" + href+ ">" + concepts[i].name + "</a>";
                       probCell.innerHTML = Math.ceil(concepts[i].value * 100) + "%";
+                      var percent = concepts[i].value;
+                      if(percent >= 0.80)
+                      {
+                        probCell.className += " bg-success";
+                      }else if(percent >= 0.60)
+                      {
+                        probCell.className += " bg-primary";
+                      }else if(percent >= 0.40)
+                      {
+                        probCell.className += " bg-info";
+                      }else if(percent >= 0.2)
+                      {
+                        probCell.className += " bg-warning";
+                      }else
+                      {
+                        probCell.className += " bg-danger";
+                      }
                       console.log(concepts[i].value);
                   }
                   spinner.style.visibility = "hidden";
@@ -181,9 +198,9 @@
         <div class="carousel-inner">
             <div class="item active">
                 <!-- Set the first background image using inline CSS below. -->
-                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
+                <div class="fill" style="background-image:url('http://s.hswstatic.com/gif/twin-16.jpg');"></div>
                 <div class="carousel-caption">
-                    <h2>Caption 1</h2>
+                    <h2>Wanna find someone look exactly like you?</h2>
                 </div>
             </div>
             <div class="item">
@@ -237,21 +254,21 @@
                   <th>#</th>
                   <th>Name</th>
                   <th>Percent of similarities</th>
-              </tr>
-          </thead>
-          <tbody>
+                </tr>
+              </thead>
+              <tbody>
 
-          </tbody>
-      </table>
-  </div>
-</div>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
 </div>
 
 <!-- Footer -->
 <footer>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-6">
             <p class="text-muted">Coded by Kelvin. Powered by <a href="https://www.clarifai.com">Clarifai</a>.</p>
         </div>
     </div>
