@@ -21,6 +21,59 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+  <style>
+    .glyphicon.fast-right-spinner {
+      -webkit-animation: glyphicon-spin-r 1s infinite linear;
+      animation: glyphicon-spin-r 1s infinite linear;
+    }
+    @-webkit-keyframes glyphicon-spin-r {
+      0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+      }
+    }
+
+    @keyframes glyphicon-spin-r {
+      0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+      }
+    }
+
+    @-webkit-keyframes glyphicon-spin-l {
+      0% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes glyphicon-spin-l {
+      0% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+    }
+  </style>
   <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
   <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -41,6 +94,7 @@
         var concepts;
         var table;
         var spinner;
+        var spinnerText;
       </script>
       <script>
         function processImageUpload(){
@@ -51,6 +105,8 @@
           fr.addEventListener("load", function () {
 
             var base64 = fr.result.substring(fr.result.indexOf(',')+1);
+            spinnerText.innerHTML = "Uploading...";
+
             app.models.predict({name: "Camille's Awesome Application"}, base64).then(
               function(response) {
                 resp = response;
@@ -78,6 +134,7 @@
               }
               );
           }, false);
+          spinnerText.innerHTML = "Reading image...";
 
           fr.readAsDataURL(file);
         }
@@ -115,7 +172,10 @@
           <div class="fileUpload btn btn-primary">
             <input id="uploadBtn" type="file" class="upload" onchange="processImageUpload();"/>
           </div>
-          <i id="spinner" class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+          <button id="spinner" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-repeat fast-right-spinner"></span>
+            <span id="spinnerText">fast-right-spinner</span>
+          </button>
         </div>
         <div class="row">
           <div class="col-md-6">
@@ -148,7 +208,9 @@
     <script>
       table = document.getElementById("displayTable");
       spinner = document.getElementById("spinner");
+      spinnerText = document.getElementById("spinnerText");
       spinner.style.visibility = "hidden";
+      spinnerText.innerHTML = "Done!";
     </script>
   </body>
   </html>
