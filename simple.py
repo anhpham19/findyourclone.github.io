@@ -23,9 +23,13 @@ def handleChat():
 	resp = urlopen(url, data.encode())
 	ret = resp.read()
 	ret = ret.decode()
-	ret = ret[:ret.index("<center>")] + ret[ret.index("</center>") + 9:]
+	ret = ret[ret.index("<FONT FACE=\"Trebuchet MS,Arial\" COLOR="):];
+	ret = ret[:ret.index("</font>") + 7]
+	ret = ret[:ret.index("<form")] + ret[ret.index("</center>") + 9:];
+	print(ret);
 	ret = ret.replace("Mitsuku", "Trump").replace("Mousebreaker's home in Leeds","America").replace("robot","man")
-	return render_template("chatTrump.html", content=Markup(ret))
+	return ret
+	#return render_template("chatTrump.html", content=Markup(ret))
 
 
 

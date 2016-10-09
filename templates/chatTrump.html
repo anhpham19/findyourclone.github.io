@@ -31,10 +31,11 @@
             var http = new XMLHttpRequest();
             http.open("POST", "", true);
             http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            var params = "search=" + <<get search value>>;
+            var params = "msg=" + document.getElementById("msg").value;
             http.send(params);
             http.onload = function() {
-                alert(http.responseText);
+                document.getElementById('textarea').innerHTML = http.responseText;
+                document.getElementById('msg').value = "";
             }
         }
     </script>
@@ -80,36 +81,32 @@
                             Chat with Donald Trump!</p>
                         </div>
                     </div>
-                    <div id="display" class="row">
-
-                    </div>
                     <div class="row">
-                        <form name="talk" id="talk" class="boxedin" method="POST">
-                            <input id="msg" name="msg" type="text" placeholder="Type here..." onkeypress="keypressed();" id="textfield" cols="100" rows="2"></input>
-                            <input id="sendbutton" type="submit" value="send"/> 
-                        </form>
-                        <div id="response">
-                            {% if content %}
-                            {{content}}
-                            {% endif %}
-                        </div>
+                        <input id="msg" name="msg" type="text" placeholder="Type here..." onkeypress="keypressed();" id="textfield" cols="100" rows="2"></input>
+                        <input id="sendbutton" type="button" onclick="doTalk();" value="send"/> 
+                    </div>
+                    <div class="row" id="textarea">
+                        {% if content %}
+                        {{content}}
+                        {% endif %}
                     </div>
                 </div>
             </div>
-            <!-- /#page-content-wrapper -->
-
-
         </div>
-        <!-- /#wrapper -->
+        <!-- /#page-content-wrapper -->
 
-        <!-- jQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script>
-            document.getElementById("msg").focus();
-        </script>
-    </body>
+    </div>
+    <!-- /#wrapper -->
 
-    </html>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById("msg").focus();
+    </script>
+</body>
+
+</html>
