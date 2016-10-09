@@ -25,38 +25,22 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         <script>
-            var textfield;
 
-            function replaceAll(str, find, replace) {
-              return str.replace(new RegExp(find, 'g'), replace);
-          }
           function doTalk()
           {
-            var url = "https://kakko.pandorabots.com/pandora/talk?botid=f326d0be8e345a13&amp;skin=chat";
-            var params = "botcust2=c65ae36e0e0c381&message=" + textfield.value;
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", url, true);
-
-            xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-            xhr.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(this.response);
-                    var text = this.response;
-                    text = replaceAll(text, "Mitsuku", "Trump");
-                    text = replaceAll(text, "Mousebreaker's home in Leeds", "America");
-                    
-                    text = text.substring(0, text.indexOf("<center>")) + text.substring(text.indexOf("</center>") + 9)
-                    document.getElementById("response").innerHTML = text;
-                    textfield.value = "";
-                }
-            };
-            xhr.send(params);
-
+            var http = new XMLHttpRequest();
+            http.open("POST", "", true);
+            http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            var params = "search=" + <<get search value>>;
+            http.send(params);
+            http.onload = function() {
+                alert(http.responseText);
+            }
         }
     </script>
 
     <script>
-    function keypressed() {
+        function keypressed() {
             var key = window.event.keyCode;
 
             if (key == 13) {
@@ -116,7 +100,11 @@
                             <input name="msg" type="text" placeholder="Type here..." onkeypress="keypressed();" id="textfield" cols="100" rows="2"></input>
                             <input id="sendbutton" type="submit" value="send"/> 
                         </form>
-                        <div id="response"></div>
+                        <div id="response">
+                            {% if content %}
+                            {{content}}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>

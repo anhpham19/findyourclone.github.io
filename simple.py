@@ -1,6 +1,9 @@
 from flask import *
 import os.path
 import os
+import urllib
+from urllib.request import *
+from urllib.parse import *
 
 app = Flask(__name__)
 
@@ -10,8 +13,15 @@ def hello_world():
 
 @app.route('/chatTrump.html', methods=['POST'])
 def handleChat():
-	print(request.form['msg'])
-	return render_template('chatTrump.html')
+	msg = request.form['msg']
+	data = urlencode({'botcust2':'90d4108dfe017b14', 'message':msg})
+	url = "https://kakko.pandorabots.com/pandora/talk?botid=f326d0be8e345a13&amp;skin=chat"
+	resp = urlopen(url, data.encode())
+	ret = resp.read()
+	ret = ret.decode()
+	ret = ret[:ret.index("<center>")] + ret[ret.index("</center>") + 9:]
+	ret = ret.replace("Mitsuku", "Trump")
+	return render_template("chatTrump.html", content=Markup(ret))
 
 @app.route('/profiles/<name>')
 def handle_name(name):
@@ -24,7 +34,7 @@ def handle_name(name):
 		return redirect('https://en.wikipedia.org/wiki/' + name.replace('.html', ''))
 
 @app.route('/<path:path>')
-def catch_all(path):
+def catch_all(path):	
 	print('catch all!')
 	print(path)
 	return send_from_directory('templates/', path);
