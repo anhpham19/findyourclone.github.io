@@ -24,7 +24,7 @@ def handleChat():
 	ret = resp.read()
 	ret = ret.decode()
 	ret = ret[:ret.index("<center>")] + ret[ret.index("</center>") + 9:]
-	ret = ret.replace("Mitsuku", "Trump")
+	ret = ret.replace("Mitsuku", "Trump").replace("Mousebreaker's home in Leeds","America").replace("robot","man")
 	return render_template("chatTrump.html", content=Markup(ret))
 
 
