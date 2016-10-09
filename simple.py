@@ -11,6 +11,10 @@ app = Flask(__name__)
 def hello_world():
 	return render_template('index.html')
 
+@app.route('/chatTrump.html', methods=['GET'])
+def handleGet():
+	return render_template("chatTrump.html")
+
 @app.route('/chatTrump.html', methods=['POST'])
 def handleChat():
 	msg = request.form['msg']
@@ -22,6 +26,8 @@ def handleChat():
 	ret = ret[:ret.index("<center>")] + ret[ret.index("</center>") + 9:]
 	ret = ret.replace("Mitsuku", "Trump")
 	return render_template("chatTrump.html", content=Markup(ret))
+
+
 
 @app.route('/profiles/<name>')
 def handle_name(name):
