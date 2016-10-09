@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Chat Page</title>
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="https://blackrockdigital.github.io/startbootstrap-simple-sidebar/css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script>
+            var textfield;
+
+            function replaceAll(str, find, replace) {
+              return str.replace(new RegExp(find, 'g'), replace);
+          }
+          function doTalk()
+          {
+            var url = "https://kakko.pandorabots.com/pandora/talk?botid=f326d0be8e345a13&amp;skin=chat";
+            var params = "botcust2=90d4108dfe017b14&message=" + textfield.value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url, true);
+
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.response);
+                    var text = this.response;
+                    text = replaceAll(text, "Mitsuku", "Trump");
+                    text = replaceAll(text, "Mousebreaker's home in Leeds", "America");
+                    
+                    text = text.substring(0, text.indexOf("<center>")) + text.substring(text.indexOf("</center>") + 9)
+                    document.getElementById("response").innerHTML = text;
+                    textfield.value = "";
+                }
+            };
+            xhr.send(params);
+
+        }
+    </script>
+
+    <script>
+    function keypressed() {
+            var key = window.event.keyCode;
+
+            if (key == 13) {
+                doTalk();
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Example</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Chat with Donald Trump!</h1>
+                        <p>You have just found someone who looks exactly like you. But wouldn't it be cool to actually meet this person? 
+                            Chat with Donald Trump!</p>
+                        </div>
+                    </div>
+                    <div id="display" class="row">
+
+                    </div>
+                    <div class="row">
+                        <form id="talk" class="boxedin" onsubmit="return false;">
+                            <textarea placeholder="Type here..." onkeypress="keypressed();" id="textfield" cols="100" rows="2"></textarea>
+                            <input id="sendbutton" type="button" value="send" onclick="doTalk()"/> 
+                        </form>
+                        <div id="response"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+
+
+        </div>
+        <!-- /#wrapper -->
+
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+        <script>
+            textfield = document.getElementById("textfield");
+        </script>
+    </body>
+
+    </html>
