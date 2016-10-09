@@ -85,7 +85,7 @@
                     </div>
                     <div class="row">
                         <form name="talk" id="talk" class="boxedin" method="POST">
-                            <input name="msg" type="text" placeholder="Type here..." onkeypress="keypressed();" id="textfield" cols="100" rows="2"></input>
+                            <input id="msg" name="msg" type="text" placeholder="Type here..." onkeypress="keypressed();" id="textfield" cols="100" rows="2"></input>
                             <input id="sendbutton" type="submit" value="send"/> 
                         </form>
                         <div id="response">
@@ -108,7 +108,7 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
         <script>
-            textfield = document.getElementById("textfield");
+            document.getElementById("msg").focus();
         </script>
     </body>
 
