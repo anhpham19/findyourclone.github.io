@@ -1,267 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Doppelgänger</title>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Full Slider - Start Bootstrap Template</title>
-
-  <!-- Bootstrap Core CSS -->
-  <style>
-    .glyphicon.fast-right-spinner {
-      -webkit-animation: glyphicon-spin-r 1s infinite linear;
-      animation: glyphicon-spin-r 1s infinite linear;
-    }
-    @-webkit-keyframes glyphicon-spin-r {
-      0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-      }
-    }
-
-    @keyframes glyphicon-spin-r {
-      0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-      }
-    }
-
-    @-webkit-keyframes glyphicon-spin-l {
-      0% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
-    }
-
-    @keyframes glyphicon-spin-l {
-      0% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
-    }
-    body { 
-      background: url(https://peteletricaufjf.files.wordpress.com/2013/08/28208-43384-tecnologia.jpg) no-repeat center center fixed; 
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-    }
-    .transparent-cell{
-      background: opacity(0.5);
-    }
-  </style>
-  <!-- Custom CSS -->
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <link href="css/full-slider.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      color: #f5f6f7;
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+  .bg-1 {
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+  .bg-2 {
+      background-color: #474e5d; /* Dark Blue */
+      color: #ffffff;
+  }
+  .bg-3 {
+      background-color: #ffffff; /* White */
+      color: #555555;
+  }
+  .bg-4 {
+      background-color: #2f2f2f; /* Black Gray */
+      color: #fff;
+  }
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+  </style>
+</head>
+<body>
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-        <script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-2.0.9.js"></script>
-        <script>
-          var app = new Clarifai.App(
-            'RXezf3hwCAZuqnsOkcIO2fcyLnKLtPHVa-FME8R8',
-            'oD3WGCGnGI2VM8yozp6xmy2zCRO8rp3nc6SphXm-'
-            );
-          var resp;
-          var error;
-          var concepts;
-          var table;
-          var spinner;
-          var spinnerText;
-        </script>
-        <script>
-          function processImageUpload(){
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Doppelgänger</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/">Home</a></li>
+        <li><a href="/">About us</a></li>
+        <li><a href="/">Contact us</a></li>
+        <li><a href="/">Hi Claire! Profile</a></li>
+      </h2>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-            spinner.style.visibility = "";
-            var file = document.getElementById('uploadBtn').files[0];
-            var fr = new FileReader();
-            fr.addEventListener("load", function () {
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center">
+  <h3 class="margin">Is it true that there are 7 other people in the world, who look exactly like you?</h3>
+  <img src="images/rainbow.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="550" height="550">
+  <h3>See for yourself!</h3>
+</div>
 
-              var base64 = fr.result.substring(fr.result.indexOf(',')+1);
-              spinnerText.innerHTML = "Uploading...";
+<!-- Second Container -->
+<div class="container-fluid bg-3 text-center">
+  <h3 class="margin">How does it work?</h3><br>
+  <div class="row">
+    <div class="col-sm-4">
+      <p>Sign up to create a profile</p>
+      <center><img src="images/signup4.jpg" class="img-responsive margin" style="width:50%" alt="Image"></center>
+    </div>
+    <div class="col-sm-4">
+      <p>Upload a picture and find your look-alike</p>
+      <center><img src="images/search2.jpg" class="img-responsive margin" style="width:50%" alt="Image"></center>
+    </div>
+    <div class="col-sm-4">
+      <p>Start a conversation!</p>
+      <center><img src="images/chat.jpg" class="img-responsive margin" style="width:50%" alt="Image"></center>
+    </div>
+  </div>
+</div>
 
-              app.models.predict({name: "Camille's Awesome Application"}, base64).then(
-                function(response) {
-                  resp = response;
-                  while(table.rows.length > 1)
-                  {
-                    table.deleteRow(1);
-                  }
-                  concepts = response.data.outputs[0].data.concepts;
-                  for(var i = 0; i < concepts.length; i++)
-                  {
-                    var row = table.insertRow(i+1);
-                    var numberCell = row.insertCell(0);
-                    var nameCell = row.insertCell(1);
-                    var probCell = row.insertCell(2);
-                    numberCell.innerHTML = (i+1).toString();
-                    var href = "\"profiles/" + concepts[i].name + ".html\"";
-                    nameCell.innerHTML = "<b><a style='color:black;'href=" + href+ ">" + concepts[i].name + "</a></b>";
-                    probCell.innerHTML = "<b>" + Math.ceil(concepts[i].value * 100) + "%" + "</b>";
-                    var percent = concepts[i].value;
-                    if(percent >= 0.80)
-                    {
-                      probCell.style.background = "rgba(0, 255, 0, 0.5)";
-                    }else if(percent >= 0.60)
-                    {
-                      probCell.style.background = "rgba(204, 255, 51, 0.5)";
-                    }else if(percent >= 0.40)
-                    {
-                      probCell.style.background = "rgba(255, 255, 0, 0.5)";
-                    }else if(percent >= 0.2)
-                    {
-                      probCell.style.background = "rgba(255, 153, 0, 0.5)";
-                    }else
-                    {
-                      probCell.style.background = "rgba(255, 0, 0, 0.5)";
-                    }
-                    console.log(concepts[i].value);
-                  }
-                  spinner.style.visibility = "hidden";
-                },
-                function(err) {
-                  console.error(err);
-                  error = err;
-                }
-                );
-            }, false);
-            spinnerText.innerHTML = "Reading image...";
+<!-- Third Container (Grid) -->
+<div class="container-fluid bg-2 text-center">
+  <h3 class="margin">Ready to track your doppelgänger(s)?</h3>
+  <p>Click on the track button below to begin your search!</p>
+  <a href="track.html" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-search"></span> Track
+  </a>
+</div>
 
-            fr.readAsDataURL(file);
-          }
-        </script>
-      </head>
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+  <p>© doppelgänger.com, Inc. All rights reserved.</p>
+</footer>
 
-      <body>
+</body>
+</html>
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-          <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="/">Home</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-              </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-          </div>
-          <!-- /.container -->
-        </nav>
-
-        <!-- Full Page Image Background Carousel Header -->
-
-
-
-        <!-- Page Content -->
-        <div class="container">
-          <br/>
-          <br/>
-
-          <div class="row">
-            <div class="col-lg-12">
-              <h1>Have you wonder who looks exactly like you?</h1>
-            </div>
-          </div>
-
-          <hr>
-          <div class="fileUpload btn btn-primary">
-            <input id="uploadBtn" type="file" class="upload" onchange="processImageUpload();"/>
-          </div>
-          <button id="spinner" type="button" class="btn btn-default">
-            <span class="glyphicon glyphicon-repeat fast-right-spinner"></span>
-            <span id="spinnerText">fast-right-spinner</span>
-          </button>
-          <div class="row">
-            <div class="col-md-9">
-              <table class="table table-hover" id="displayTable">
-                <thead>
-                  <tr>
-                    <th>RANK</th>
-                    <th>NAME</th>
-                    <th>PERCENT OF SIMILARITIES</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-              </table>
-            </div>
-          </div> 
-
-          <!-- Footer -->
-          <footer>
-            <div class="row">
-              <div class="col-md-4">
-                <p>Powered by <a href="https://www.clarifai.com">Clarifai</a>.</p>
-              </div>
-            </div>
-            <!-- /.row -->
-          </footer>
-
-        </div>
-        <!-- /.container -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
-        <!-- Script to Activate the Carousel -->
-        <script>
-          $('.carousel').carousel({
-        interval: 5000 //changes the speed
-      })
-    </script>
-    <script>
-      table = document.getElementById("displayTable");
-      spinner = document.getElementById("spinner");
-      spinnerText = document.getElementById("spinnerText");
-      spinner.style.visibility = "hidden";
-      spinnerText.innerHTML = "Done!";
-    </script>
-
-  </body>
-
-  </html>

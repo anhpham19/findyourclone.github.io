@@ -2,79 +2,66 @@
 <html lang="en">
 
 <head>
-
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title>Doppelgänger</title>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Full Slider - Start Bootstrap Template</title>
-
-  <!-- Bootstrap Core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
-    .glyphicon.fast-right-spinner {
-      -webkit-animation: glyphicon-spin-r 1s infinite linear;
-      animation: glyphicon-spin-r 1s infinite linear;
-    }
-    @-webkit-keyframes glyphicon-spin-r {
-      0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-      }
-    }
-
-    @keyframes glyphicon-spin-r {
-      0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-      }
-    }
-
-    @-webkit-keyframes glyphicon-spin-l {
-      0% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
-    }
-
-    @keyframes glyphicon-spin-l {
-      0% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-      }
-
-      100% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-      }
-    }
-    body { 
-      background: url(https://peteletricaufjf.files.wordpress.com/2013/08/28208-43384-tecnologia.jpg) no-repeat center center fixed; 
+  body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      color: #f5f6f7;
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+  .bg-1 {
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+  .bg-2 {
+      background-color: #474e5d; /* Dark Blue */
+      color: #ffffff;
+  }
+  .bg-3 {
+      background-color: #ffffff; /* White */
+      color: #555555;
+  }
+  .bg-4 {
+      background-color: #2f2f2f; /* Black Gray */
+      color: #fff;
+  }
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+  .navbar {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      border: 0;
+      border-radius: 0;
+      margin-bottom: 0;
+      font-size: 12px;
+      letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+      color: #1abc9c !important;
+  }
+  body { 
+      background: url(https://s10.postimg.org/jd1848grt/graymap.jpg) no-repeat center center fixed; 
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
     }
     .transparent-cell{
-      background: opacity(0.5);
+      background: opacity(0.1);
     }
+  </style>
+
   </style>
   <!-- Custom CSS -->
   <link href="css/full-slider.css" rel="stylesheet">
@@ -87,6 +74,18 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         <script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-2.0.9.js"></script>
+        <script>
+          var app = new Clarifai.App(
+            'RXezf3hwCAZuqnsOkcIO2fcyLnKLtPHVa-FME8R8',
+            'oD3WGCGnGI2VM8yozp6xmy2zCRO8rp3nc6SphXm-'
+            );
+          var resp;
+          var error;
+          var concepts;
+          var table;
+          var spinner;
+          var spinnerText;
+        </script>
         <script>
           var app = new Clarifai.App(
             'RXezf3hwCAZuqnsOkcIO2fcyLnKLtPHVa-FME8R8',
@@ -125,14 +124,7 @@
                     var nameCell = row.insertCell(1);
                     var probCell = row.insertCell(2);
                     numberCell.innerHTML = (i+1).toString();
-                    var href = "\"https://en.wikipedia.org/wiki/" + concepts[i].name + "\"";
-                    if(concepts[i].name == "Donald Trump")
-                    {
-                        href = "trump%20n%20hilary/donaldtrump.html"
-                    }else if(concepts[i].name == "Hilary Clinton")
-                    {
-                        href = "trump%20n%20hilary/hilaryclinton.html"
-                    }
+                    var href = "\"profiles/" + concepts[i].name + ".html\"";
                     nameCell.innerHTML = "<b><a style='color:black;'href=" + href+ ">" + concepts[i].name + "</a></b>";
                     probCell.innerHTML = "<b>" + Math.ceil(concepts[i].value * 100) + "%" + "</b>";
                     var percent = concepts[i].value;
@@ -172,31 +164,29 @@
       <body>
 
         <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <nav class="navbar navbar-default">
           <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="https://findyourclone.github.io/">Home</a>
+              <a class="navbar-brand" href="#">Doppelgänger</a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
+            <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Home</a></li>
+                <li><a href="/">About us</a></li>
+                <li><a href="/">Contact us</a></li>
+                <li><a href="/">Hi Claire! Profile</a></li>
+              </h2>
               </ul>
             </div>
-            <!-- /.navbar-collapse -->
           </div>
-          <!-- /.container -->
         </nav>
 
         <!-- Full Page Image Background Carousel Header -->
-
-
 
         <!-- Page Content -->
         <div class="container">
@@ -218,13 +208,13 @@
             <span id="spinnerText">fast-right-spinner</span>
           </button>
           <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-6">
               <table class="table table-hover" id="displayTable">
                 <thead>
                   <tr>
-                    <th>RANK</th>
-                    <th>NAME</th>
-                    <th>PERCENT OF SIMILARITIES</th>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Percent of similarities</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -232,13 +222,13 @@
                 </tbody>
               </table>
             </div>
-          </div> 
+          </div>
 
           <!-- Footer -->
           <footer>
             <div class="row">
-              <div class="col-md-4">
-                <p>Powered by <a href="https://www.clarifai.com">Clarifai</a>.</p>
+              <div class="col-md-6">
+                <p class="text-muted">Coded by Kelvin. Powered by <a href="https://www.clarifai.com">Clarifai</a>.</p>
               </div>
             </div>
             <!-- /.row -->
