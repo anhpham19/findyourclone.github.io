@@ -33,11 +33,11 @@
           function doTalk()
           {
             var url = "https://kakko.pandorabots.com/pandora/talk?botid=f326d0be8e345a13&amp;skin=chat";
-            var params = "botcust2=90d4108dfe017b14&message=" + textfield.value;
+            var params = "botcust2=c65ae36e0e0c381&message=" + textfield.value;
             var xhr = new XMLHttpRequest();
             xhr.open("POST", url, true);
 
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     console.log(this.response);
