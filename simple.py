@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-	return render_template('index.html')
+	return send_from_directory('templates/index.html')
 
 @app.route('/chatTrump.html', methods=['GET'])
 def handleGet():
@@ -34,7 +34,7 @@ def handle_name(name):
 	print(name)
 	if(os.path.exists("templates/profiles/" + name)):
 		print("Found a profile!")
-		return render_template("profiles/" + name)
+		return send_from_directory("templates/profiles/" + name)
 	else:
 		print("Profile Not Exist")
 		return redirect('https://en.wikipedia.org/wiki/' + name.replace('.html', ''))
