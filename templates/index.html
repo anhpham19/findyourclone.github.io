@@ -12,7 +12,6 @@
   <title>Full Slider - Start Bootstrap Template</title>
 
   <!-- Bootstrap Core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
   <style>
     .glyphicon.fast-right-spinner {
       -webkit-animation: glyphicon-spin-r 1s infinite linear;
@@ -77,6 +76,14 @@
     }
   </style>
   <!-- Custom CSS -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <link href="css/full-slider.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
@@ -125,14 +132,7 @@
                     var nameCell = row.insertCell(1);
                     var probCell = row.insertCell(2);
                     numberCell.innerHTML = (i+1).toString();
-                    var href = "\"https://en.wikipedia.org/wiki/" + concepts[i].name + "\"";
-                    if(concepts[i].name == "Donald Trump")
-                    {
-                        href = "trump%20n%20hilary/donaldtrump.html"
-                    }else if(concepts[i].name == "Hilary Clinton")
-                    {
-                        href = "trump%20n%20hilary/hilaryclinton.html"
-                    }
+                    var href = "\"profiles/" + concepts[i].name + ".html\"";
                     nameCell.innerHTML = "<b><a style='color:black;'href=" + href+ ">" + concepts[i].name + "</a></b>";
                     probCell.innerHTML = "<b>" + Math.ceil(concepts[i].value * 100) + "%" + "</b>";
                     var percent = concepts[i].value;
@@ -246,12 +246,7 @@
 
         </div>
         <!-- /.container -->
-
-        <!-- jQuery -->
-        <script src="js/jquery.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
         <!-- Script to Activate the Carousel -->
         <script>

@@ -112,9 +112,9 @@
 
                     </div>
                     <div class="row">
-                        <form id="talk" class="boxedin" onsubmit="return false;">
-                            <textarea placeholder="Type here..." onkeypress="keypressed();" id="textfield" cols="100" rows="2"></textarea>
-                            <input id="sendbutton" type="button" value="send" onclick="doTalk()"/> 
+                        <form name="talk" id="talk" class="boxedin" method="POST">
+                            <input name="msg" type="text" placeholder="Type here..." onkeypress="keypressed();" id="textfield" cols="100" rows="2"></input>
+                            <input id="sendbutton" type="submit" value="send"/> 
                         </form>
                         <div id="response"></div>
                     </div>
