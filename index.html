@@ -126,8 +126,14 @@
                     var probCell = row.insertCell(2);
                     numberCell.innerHTML = (i+1).toString();
                     var href = "\"https://en.wikipedia.org/wiki/" + concepts[i].name + "\"";
+                    if(concepts[i].name == "Donald Trump")
+                    {
+                        href = "trump%20n%20hilary/donaldtrump.html"
+                    }else if(concepts[i].name == "Hilary Clinton")
+                    {
+                        href = "trump%20n%20hilary/hilaryclinton.html"
+                    }
                     nameCell.innerHTML = "<b><a style='color:black;'href=" + href+ ">" + concepts[i].name + "</a></b>";
-                    nameCell.className += " table-active";
                     probCell.innerHTML = "<b>" + Math.ceil(concepts[i].value * 100) + "%" + "</b>";
                     var percent = concepts[i].value;
                     if(percent >= 0.80)
