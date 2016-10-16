@@ -10,34 +10,34 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
-  body {
+    body {
       font: 20px Montserrat, sans-serif;
       line-height: 1.8;
       color: #f5f6f7;
-  }
-  p {font-size: 16px;}
-  .margin {margin-bottom: 45px;}
-  .bg-1 {
+    }
+    p {font-size: 16px;}
+    .margin {margin-bottom: 45px;}
+    .bg-1 {
       background-color: #1abc9c; /* Green */
       color: #ffffff;
-  }
-  .bg-2 {
+    }
+    .bg-2 {
       background-color: #474e5d; /* Dark Blue */
       color: #ffffff;
-  }
-  .bg-3 {
+    }
+    .bg-3 {
       background-color: #ffffff; /* White */
       color: #555555;
-  }
-  .bg-4 {
+    }
+    .bg-4 {
       background-color: #2f2f2f; /* Black Gray */
       color: #fff;
-  }
-  .container-fluid {
+    }
+    .container-fluid {
       padding-top: 70px;
       padding-bottom: 70px;
-  }
-  .navbar {
+    }
+    .navbar {
       padding-top: 15px;
       padding-bottom: 15px;
       border: 0;
@@ -45,29 +45,50 @@
       margin-bottom: 0;
       font-size: 12px;
       letter-spacing: 5px;
-  }
-  .navbar-nav  li a:hover {
+    }
+    .navbar-nav  li a:hover {
       color: #1abc9c !important;
-  }
+    }
   </style>
 </head>
 <body>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '180891425649164',
-      xfbml      : true,
-      version    : 'v2.8'
-    });
-  };
+  <script>
+    window.fbAsyncInit = function() 
+    {
+      FB.init({
+        appId      : '180891425649164',
+        xfbml      : true,
+        version    : 'v2.8'
+      });
+    };
 
-  (function(d, s, id){
+    (function(d, s, id)
+    {
      var js, fjs = d.getElementsByTagName(s)[0];
      if (d.getElementById(id)) {return;}
      js = d.createElement(s); js.id = id;
      js.src = "https://connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
+ </script>
+
+ <script>
+  var resp;
+  var usr;
+  function handleLogin()
+  {
+    FB.login(function(response)
+    {
+      resp = response;
+      if(resp.status == 'connected')
+      {
+        FB.api('/me', function(meResp) {
+          console.log('Successful login for: ' + meResp.name);
+          usr.innerHTML = meResp.name;
+        });
+      }
+    });
+  }
 </script>
 <!-- Navbar -->
 <nav class="navbar navbar-default">
@@ -85,11 +106,11 @@
         <li><a href="/">Home</a></li>
         <li><a href="aboutus.html">About us</a></li>
         <li><a href="contactus.html">Contact us</a></li>
-        <li><a onclick='FB.login();'>Hi Claire! Profile</a></li>
+        <li><a id='username' onclick='FB.login();'>Hi Claire! Profile</a></li>
       </h2>
-      </ul>
-    </div>
+    </ul>
   </div>
+</div>
 </nav>
 
 <!-- First Container -->
@@ -132,7 +153,9 @@
   <p>© doppelgänger.com, Inc. All rights reserved.</p>
   <p>Powered by Clarifai</p>
 </footer>
-
+<script>
+  usr = document.getElementById('username');
+</script>
 </body>
 </html>
 
