@@ -60,6 +60,9 @@
         xfbml      : true,
         version    : 'v2.8'
       });
+      FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+      });
     };
 
     (function(d, s, id)
@@ -75,62 +78,60 @@
       console.log('statusChangeCallback');
       console.log(response);
 
-    if (response.status === 'connected') {
-      updateName();
-    } else {
-      usr.innerHTML = 'Please log ' +
-      'into Facebook.';
-    }
-  }
-
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-</script>
-
-<script>
-  var resp;
-  var usr;
-  function updateName()
-  {
-    FB.api('/me', function(response) {
-          console.log('Successful login for: ' + response.name);
-          usr.innerHTML = response.name;
-        });
-  }
-  function handleLogin()
-  {
-    FB.login(function(response)
-    {
-      resp = response;
-      if(resp.status == 'connected')
-      {
+      if (response.status === 'connected') {
         updateName();
+      } else {
+        usr.innerHTML = 'Please log ' +
+        'into Facebook.';
       }
-    });
-  }
-</script>
-<!-- Navbar -->
-<nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Doppelgänger</a>
+    }
+
+
+  </script>
+
+  <script>
+    var resp;
+    var usr;
+    function updateName()
+    {
+      FB.api('/me', function(response) {
+        console.log('Successful login for: ' + response.name);
+        usr.innerHTML = response.name;
+      });
+    }
+    function handleLogin()
+    {
+      FB.login(function(response)
+      {
+        resp = response;
+        if(resp.status == 'connected')
+        {
+          updateName();
+        }
+      });
+    }
+  </script>
+  <!-- Navbar -->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Doppelgänger</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/">Home</a></li>
+          <li><a href="aboutus.html">About us</a></li>
+          <li><a href="contactus.html">Contact us</a></li>
+          <li><a id='username' onclick='handleLogin();'>Hi Claire! Profile</a></li>
+        </h2>
+      </ul>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/">Home</a></li>
-        <li><a href="aboutus.html">About us</a></li>
-        <li><a href="contactus.html">Contact us</a></li>
-        <li><a id='username' onclick='handleLogin();'>Hi Claire! Profile</a></li>
-      </h2>
-    </ul>
   </div>
-</div>
 </nav>
 
 <!-- First Container -->
