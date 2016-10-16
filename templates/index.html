@@ -105,7 +105,7 @@
       resp = response;
       if(resp.status == 'connected')
       {
-        
+        updateName();
       }
     });
   }
@@ -126,7 +126,7 @@
         <li><a href="/">Home</a></li>
         <li><a href="aboutus.html">About us</a></li>
         <li><a href="contactus.html">Contact us</a></li>
-        <li><a id='username' onclick='FB.login();'>Hi Claire! Profile</a></li>
+        <li><a id='username' onclick='handleLogin();'>Hi Claire! Profile</a></li>
       </h2>
     </ul>
   </div>
